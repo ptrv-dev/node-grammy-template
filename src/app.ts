@@ -1,10 +1,14 @@
-import { Bot } from 'grammy';
-import { config, logger } from '@/utils';
+import { Bot, type Context } from 'grammy';
+import { hydrateReply, parseMode, ParseModeFlavor } from '@grammyjs/parse-mode';
 import { randomBytes } from 'crypto';
+import { config, logger } from '@/utils';
 
 const BOT_TOKEN = config.get('BOT_TOKEN');
 
-const bot = new Bot(BOT_TOKEN);
+const bot = new Bot<ParseModeFlavor<Context>>(BOT_TOKEN);
+
+bot.use(hydrateReply);
+bot.api.config.use(parseMode('HTML'));
 
 bot.start({
   onStart: ({ username }) => {
