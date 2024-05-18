@@ -1,0 +1,39 @@
+{
+  "name": "node-grammy-template",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon ./src/app.ts",
+    "build": "tsc",
+    "start": "node -r module-alias/register -r dotenv/config ./dist/app.js"
+  },
+  "devDependencies": {
+    "@types/node": "^20.12.12",
+    "nodemon": "^3.1.0",
+    "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.4.5"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "grammy": "^1.23.0",
+    "module-alias": "^2.2.3"
+  },
+  "_moduleAliases": {
+    "@": "./dist"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "**/*.test.ts",
+      "**/*.spec.ts",
+      ".git",
+      "node_modules"
+    ],
+    "watch": [
+      "./src"
+    ],
+    "exec": "node -r tsconfig-paths/register -r dotenv/config -r ts-node/register ./src/app.ts",
+    "ext": "ts, js"
+  }
+}
